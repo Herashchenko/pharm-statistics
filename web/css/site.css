@@ -86,3 +86,13 @@ a.desc:after {
 .form-group {
     margin-bottom: 1rem;
 }
+
+/* Charts */
+.chart-container {
+    min-height: 400px;
+}
+
+/* DataTables full width */
+.table-full-width {
+    width: 100%;
+}

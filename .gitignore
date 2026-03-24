@@ -44,5 +44,8 @@ tests/_support/_generated
 # Docker volumes data
 /docker/data/
 
+# Node.js
+/node_modules/
+
 # Claude Code
 .claude/

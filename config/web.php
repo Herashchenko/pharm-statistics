@@ -51,15 +51,14 @@ $config = [
             'nodes' => [
                 ['http_address' => 'elasticsearch:9200'],
             ],
+            'dslVersion' => 7,
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

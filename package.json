@@ -1,0 +1,20 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Тестове завдання. Стек: PHP 8.2, Yii2 Basic, MongoDB, Elasticsearch.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "datatables.net": "^2.3.7",
+    "datatables.net-bs5": "^2.3.7",
+    "highcharts": "^12.5.0"
+  }
+}

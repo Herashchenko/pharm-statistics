@@ -20,6 +20,8 @@ RUN apt-get update && apt-get install -y \
         curl \
     && pecl install mongodb \
     && docker-php-ext-enable mongodb \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

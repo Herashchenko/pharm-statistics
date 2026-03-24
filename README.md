@@ -10,8 +10,9 @@ git clone https://github.com/Herashchenko/pharm-statistics.git && cd pharm-stati
 # Піднімаємо контейнери
 docker compose up -d --build
 
-# Встановлюємо PHP-залежності
+# Встановлюємо залежності
 docker compose exec php composer install
+docker compose exec php bash -c "cd /app && npm install"
 ```
 
 ### Перевірка
