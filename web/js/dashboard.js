@@ -1,8 +1,18 @@
 $(function () {
-    $.getJSON('/site/get-kpi', renderKpi);
-    $.getJSON('/site/get-sales-by-region', renderRegionsChart);
-    $.getJSON('/site/get-top-products', renderProductsChart);
-    $.getJSON('/site/get-table-data', renderTable);
+    loadWidget('/site/get-kpi', renderKpi, '#kpi-total-quantity');
+    loadWidget('/site/get-sales-by-region', renderRegionsChart, '#chart-regions');
+    loadWidget('/site/get-top-products', renderProductsChart, '#chart-products');
+    loadWidget('/site/get-table-data', renderTable, '#table-container');
+
+    function loadWidget(url, onSuccess, errorTarget) {
+        $.getJSON(url)
+            .done(onSuccess)
+            .fail(function () {
+                $(errorTarget).html(
+                    '<div class="widget-error">Не вдалося завантажити дані</div>'
+                );
+            });
+    }
 
     function formatNumber(val) {
         return parseFloat(val).toLocaleString('uk-UA', {
@@ -88,7 +98,8 @@ $(function () {
     }
 
     function renderTable(tableData) {
-        $('#dashboard-table').DataTable({
+        $('#table-container .loading-spinner').remove();
+        $('#dashboard-table').removeClass('d-none').DataTable({
             data: tableData,
             columns: [
                 {data: 'region'},

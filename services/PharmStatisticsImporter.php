@@ -24,6 +24,7 @@ class PharmStatisticsImporter
     public function import(?callable $onProgress = null): int
     {
         $collection = Yii::$app->mongodb->getCollection('pharm_statistics');
+        $collection->remove([]);
         $batch = [];
         $totalInserted = 0;
 

@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$common = require __DIR__ . '/common.php';
 
 $config = [
     'id' => 'basic',
@@ -11,26 +12,15 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
-    'components' => [
+    'components' => array_merge($common, [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'N3mO-5lF8Xw0On7Pa11iybRgjPU5zq0w',
+            'cookieValidationKey' => getenv('COOKIE_VALIDATION_KEY') ?: 'N3mO-5lF8Xw0On7Pa11iybRgjPU5zq0w',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
-        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
-        ],
-        'mailer' => [
-            'class' => \yii\symfonymailer\Mailer::class,
-            'viewPath' => '@app/mail',
-            // send all mails to a file by default.
-            'useFileTransport' => true,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -42,24 +32,13 @@ $config = [
             ],
         ],
         'db' => $db,
-        'mongodb' => [
-            'class' => \yii\mongodb\Connection::class,
-            'dsn' => 'mongodb://mongodb:27017/pharm_statistics',
-        ],
-        'elasticsearch' => [
-            'class' => \yii\elasticsearch\Connection::class,
-            'nodes' => [
-                ['http_address' => 'elasticsearch:9200'],
-            ],
-            'dslVersion' => 7,
-        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-    ],
+    ]),
     'params' => $params,
 ];
 

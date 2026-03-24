@@ -53,14 +53,26 @@ $this->title = 'Фарм-статистика — Dashboard';
         <div class="col-md-6 mb-3">
             <div class="card h-100">
                 <div class="card-body">
-                    <div id="chart-regions" class="chart-container"></div>
+                    <div id="chart-regions" class="chart-container">
+                        <div class="loading-spinner">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Завантаження...</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6 mb-3">
             <div class="card h-100">
                 <div class="card-body">
-                    <div id="chart-products" class="chart-container"></div>
+                    <div id="chart-products" class="chart-container">
+                        <div class="loading-spinner">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Завантаження...</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,8 +82,13 @@ $this->title = 'Фарм-статистика — Dashboard';
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-body">
-                    <table id="dashboard-table" class="table table-striped table-full-width">
+                <div class="card-body" id="table-container">
+                    <div class="loading-spinner">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Завантаження...</span>
+                        </div>
+                    </div>
+                    <table id="dashboard-table" class="table table-striped table-full-width d-none">
                         <thead>
                             <tr>
                                 <th>Область</th>

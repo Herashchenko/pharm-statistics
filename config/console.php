@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$common = require __DIR__ . '/common.php';
 
 $config = [
     'id' => 'basic-console',
@@ -13,7 +14,7 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
         '@tests' => '@app/tests',
     ],
-    'components' => [
+    'components' => array_merge($common, [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -26,26 +27,8 @@ $config = [
             ],
         ],
         'db' => $db,
-        'mongodb' => [
-            'class' => \yii\mongodb\Connection::class,
-            'dsn' => 'mongodb://mongodb:27017/pharm_statistics',
-        ],
-        'elasticsearch' => [
-            'class' => \yii\elasticsearch\Connection::class,
-            'nodes' => [
-                ['http_address' => 'elasticsearch:9200'],
-            ],
-            'dslVersion' => 7,
-        ],
-    ],
+    ]),
     'params' => $params,
-    /*
-    'controllerMap' => [
-        'fixture' => [ // Fixture generation command line.
-            'class' => 'yii\faker\FixtureController',
-        ],
-    ],
-    */
 ];
 
 if (YII_ENV_DEV) {
