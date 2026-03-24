@@ -1,0 +1,44 @@
+# IDE
+.idea/
+.vscode/
+nbproject/
+.buildpath
+.project
+.settings
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Composer
+/vendor/
+composer.phar
+
+# PHPUnit
+phpunit.phar
+/phpunit.xml
+
+# Codeception
+tests/_output/*
+tests/_support/_generated
+
+# Vagrant
+/.vagrant
+
+# Yii2 runtime & assets
+/runtime/
+/web/assets/
+
+# Environment & credentials
+.env
+/config/db.php
+/config/test_db.php
+
+# Docker volumes data
+/docker/data/
+
+# Claude Code
+.claude/
