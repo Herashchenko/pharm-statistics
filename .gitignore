@@ -37,6 +37,10 @@ tests/_support/_generated
 /config/db.php
 /config/test_db.php
 
+# Import data files
+/data/*
+!/data/.gitkeep
+
 # Docker volumes data
 /docker/data/
 

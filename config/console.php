@@ -28,7 +28,7 @@ $config = [
         'db' => $db,
         'mongodb' => [
             'class' => \yii\mongodb\Connection::class,
-            'dsn' => 'mongodb://mongodb:27017/farm_statistics',
+            'dsn' => 'mongodb://mongodb:27017/pharm_statistics',
         ],
         'elasticsearch' => [
             'class' => \yii\elasticsearch\Connection::class,

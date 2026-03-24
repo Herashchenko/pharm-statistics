@@ -1,57 +1,41 @@
-# Farm Statistics
+# Pharm Statistics
 
 Тестове завдання. Стек: PHP 8.2, Yii2 Basic, MongoDB, Elasticsearch.
 
 ## Розгортання
 
-### 1. Піднімаємо контейнери
-
 ```bash
+git clone https://github.com/Herashchenko/pharm-statistics.git && cd pharm-statistics
+
+# Піднімаємо контейнери
 docker compose up -d --build
+
+# Встановлюємо PHP-залежності
+docker compose exec php composer install
 ```
 
-### 2. Встановлюємо Yii2 Basic
-
-```bash
-# Створюємо проект у тимчасову папку (бо робоча директорія не порожня)
-docker compose exec php composer create-project --prefer-dist yiisoft/yii2-app-basic /tmp/yii2-basic
-
-# Копіюємо файли в робочу директорію
-docker compose exec php bash -c "cp -rn /tmp/yii2-basic/. /app/ && rm -rf /tmp/yii2-basic"
-```
-
-### 3. Встановлюємо пакети MongoDB та Elasticsearch
-
-```bash
-docker compose exec php composer require yiisoft/yii2-mongodb
-docker compose exec php composer require yiisoft/yii2-elasticsearch
-```
-
-### 4. Конфігурація підключень
-
-В `config/web.php` та `config/console.php` додати в масив `'components'`:
-
-```php
-'mongodb' => [
-    'class' => \yii\mongodb\Connection::class,
-    'dsn' => 'mongodb://mongodb:27017/farm_statistics',
-],
-'elasticsearch' => [
-    'class' => \yii\elasticsearch\Connection::class,
-    'nodes' => [
-        ['http_address' => 'elasticsearch:9200'],
-    ],
-],
-```
-
-Хости `mongodb` та `elasticsearch` — це імена сервісів з `docker compose.yml`. Docker DNS резолвить їх автоматично всередині мережі.
-
-### 5. Перевірка
+### Перевірка
 
 ```bash
 curl http://localhost:8080                                # Yii2 welcome page
 curl http://localhost:9200                                # Elasticsearch
 docker compose exec mongodb mongosh --eval "db.stats()"  # MongoDB
+```
+
+## Імпорт даних з Excel
+
+Покладіть `.xls` файл у директорію `data/` та запустіть команду:
+
+```bash
+docker compose exec php php yii import /app/data/your-file.xls
+```
+
+Команда читає файл чанками, пропускає заголовки і записує дані в колекцію `pharm_statistics` батчами по 500 документів.
+
+Перевірка результату:
+
+```bash
+docker compose exec mongodb mongosh pharm_statistics --eval "db.pharm_statistics.countDocuments()"
 ```
 
 ## Сервіси
