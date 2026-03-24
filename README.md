@@ -30,12 +30,23 @@ docker compose exec mongodb mongosh --eval "db.stats()"  # MongoDB
 docker compose exec php php yii import /app/data/your-file.xls
 ```
 
-Команда читає файл чанками, пропускає заголовки і записує дані в колекцію `pharm_statistics` батчами по 500 документів.
-
 Перевірка результату:
 
 ```bash
 docker compose exec mongodb mongosh pharm_statistics --eval "db.pharm_statistics.countDocuments()"
+```
+
+## Трансфер даних у Elasticsearch
+
+Після імпорту в MongoDB перенесіть дані в Elasticsearch для агрегацій:
+
+```bash
+docker compose exec php php yii elastic-transfer
+```
+Перевірка:
+
+```bash
+curl http://localhost:9200/report_data/_count
 ```
 
 ## Сервіси
